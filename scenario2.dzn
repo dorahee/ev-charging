@@ -1,0 +1,23 @@
+num_days = 1;
+num_periods_day = 16;
+num_evs = 10;
+max_charge = 25; %kW
+total_energy = 20; %kWh
+wholesale_prices = array2d(1..num_days, 1..num_periods_day,
+[61.91,
+68.74,
+82.17,
+83.75,
+77.12,
+86.14,
+87.01,
+91.69,
+73.69,
+76.56,
+90.17,
+74.1,
+85.25,
+95.29,
+86.73,
+84.49]);
+network_tariff = 15; 
