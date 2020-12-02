@@ -57,6 +57,7 @@ datetimes_year = df_datetimes_year.groupby(pd.Grouper(freq="M"))["Datetime"].app
 # start scheduling
 df_charge_strategies = pd.DataFrame()
 tab_year = []
+minizinc_outputs_year = dict()
 for month, datetime_month, prices_month, loads_month in zip(months_year, datetimes_year, prices_year, loads_year):
     month = month.strftime("%Y-%m")
     num_days = int(len(prices_month) / num_periods_day)
@@ -82,6 +83,8 @@ for month, datetime_month, prices_month, loads_month in zip(months_year, datetim
     result = ins.solve()
     charge_ev_day_period = result.solution.charge_strategy
     minizinc_outputs = ast.literal_eval(result.solution._output_item)
+    minizinc_outputs_year["Result"] = list(minizinc_outputs.keys())
+    minizinc_outputs_year[month] = [x[0] for x in list(minizinc_outputs.values())]
     wholesale_cost = minizinc_outputs["wholesale_cost"]
     network_charge = minizinc_outputs["network_charge"]
     max_demand = minizinc_outputs["max_demand"]
@@ -159,6 +162,20 @@ for month, datetime_month, prices_month, loads_month in zip(months_year, datetim
     tab_year.append(tab)
 
 print("Saving plots...")
+df = pd.DataFrame.from_dict(minizinc_outputs_year).transpose()
+df.columns = df.iloc[0]
+df = df[1:]
+minizinc_outputs_year_source = ColumnDataSource(data=df)
+# columns = []
+# for k in minizinc_outputs_year.keys():
+#     if "Res" in k:
+#         columns.append(TableColumn(field=k, title=k))
+#     else:
+#         columns.append(TableColumn(field=k, title=k, formatter=NumberFormatter(format='0.00')))
+data_table = DataTable(source=minizinc_outputs_year_source, width=2000, height=500)
+tab = Panel(child=data_table, title="Yearly Costs and Maximum Demands")
+# tab_year.insert(0, tab)
+
 output_file(f"demands_year.html")
 output_graph = layout(row(Tabs(tabs=tab_year)), sizing_mode="scale_width")
 save(output_graph)
