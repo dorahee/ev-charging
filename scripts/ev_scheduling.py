@@ -35,5 +35,5 @@ def schedule_evs(num_days, num_periods_day, peak_periods, off_peak_periods,
     # organise results
     charge_ev_day_period = result.solution.charge_strategy
     minizinc_outputs = ast.literal_eval(result.solution._output_item)
-
+    minizinc_outputs["time (ms)"] = [result.statistics['time'].microseconds * 0.001]
     return charge_ev_day_period, minizinc_outputs

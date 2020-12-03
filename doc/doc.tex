@@ -99,12 +99,12 @@ The optimisation problem was modelled in MinZinc (see~\ref{model:mip}) and solve
 		% max demand auxillary variable
 		constraint forall (d in DAYS) (
 		forall (p in PEAK_PERIODS) (
-		max_demand_peak >= (sum (e in EVS) (charge_strategy[e, d, p]) + existing_loads[d, p] * 0.5)
+		max_demand_peak >= (sum (e in EVS) (charge_strategy[e, d, p]) + existing_loads[d, p] / 0.5)
 		));
 		
 		constraint forall (d in DAYS) (
 		forall (p in OFF_PEAK_PERIODS) (
-		max_demand_off_peak >= (sum (e in EVS) (charge_strategy[e, d, p]) + existing_loads[d, p] * 0.5)
+		max_demand_off_peak >= (sum (e in EVS) (charge_strategy[e, d, p]) + existing_loads[d, p] / 0.5)
 		));
 		
 		solve minimize objective;
