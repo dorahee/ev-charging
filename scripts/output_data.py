@@ -18,9 +18,8 @@ days_week = {
 }
 
 
-def merge_results(num_days, charge_ev_day_period, loads_month, prices_month, datetime_month,
-                  max_demand_peak, max_demand_off_peak,
-                  peak_periods, off_peak_periods, network_tariff_peak, network_tariff_off_peak):
+def merge_results(charge_ev_day_period, loads_month, prices_month, datetime_month,
+                  max_demand_peak, max_demand_off_peak):
     # combine results
     charge_month = []
     for charge_ev in charge_ev_day_period:
@@ -52,8 +51,7 @@ def merge_results(num_days, charge_ev_day_period, loads_month, prices_month, dat
     return combine_data_source_dict
 
 
-def visualise_monthly_results(figure_title, month, datetime_month, network_tariff_peak, network_tariff_off_peak,
-                              data_source_dict, prices_month, minizinc_outputs):
+def visualise_monthly_results(figure_title, datetime_month, data_source_dict, prices_month, minizinc_outputs):
     bokeh_data_source = ColumnDataSource(data_source_dict)
     WOD_dict = {}
     for i, s in enumerate([str(x) for x in datetime_month]):
@@ -71,12 +69,13 @@ def visualise_monthly_results(figure_title, month, datetime_month, network_tarif
     legend_items = []
     tooltips = []
     tooltips.append((f'Datetime', f"@Datetime"))
+    x_key = "Periods"
     for k, v in data_source_dict.items():
         legend_label = None
         if "Per" not in k and "Cost" not in k and "Obj" not in k and "Char" not in k and "Date" not in k:
             colour_index += 1
             if "Pri" not in k:
-                pl = p_month.line(y=k, x='Periods',
+                pl = p_month.line(y=k, x=x_key,
                                   source=bokeh_data_source, line_width=2,
                                   color=colour_choices[colour_index])
                 tooltips.append((f'{k}', f"@{k} kW"))
@@ -87,7 +86,7 @@ def visualise_monthly_results(figure_title, month, datetime_month, network_tarif
             else:
                 p_month.extra_y_ranges = {"WholesalePrices": Range1d(start=min(prices_month), end=max(prices_month))}
                 p_month.add_layout(LinearAxis(y_range_name="WholesalePrices", axis_label="Price ($/kWh)"), 'right')
-                pl = p_month.line(y=k, x='Periods',
+                pl = p_month.line(y=k, x=x_key,
                                   source=bokeh_data_source, line_width=2, line_dash="dashed",
                                   y_range_name='WholesalePrices', color=colour_choices[colour_index])
                 tooltips.append((f'{k}', f"@{k} $/MWh"))

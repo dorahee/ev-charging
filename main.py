@@ -2,8 +2,7 @@ import numpy as np
 from pandas_bokeh import *
 from bokeh.layouts import layout
 from bokeh.models import *
-from bokeh.plotting import figure, output_file
-from bokeh.palettes import Set2
+from bokeh.plotting import output_file
 from datetime import datetime, date
 import scripts.ev_scheduling as ev
 import scripts.import_data as input
@@ -38,23 +37,20 @@ def main(use_existing_load, use_wholesale_prices):
 
     # start scheduling
     tab_year = []
-    minizinc_outputs_year = dict()
     for month, datetime_month, prices_month, loads_month in zip(months_year, datetimes_year, prices_year, loads_year):
         month = month.strftime("%Y-%m")
 
         # prepare input parameters
-        num_days = int(len(prices_month) / num_periods_day)
+        num_days = len(set([x.strftime("%Y-%m-%d") for x in datetime_month]))
         num_periods = len(prices_month)
+        prices_2d = input.reshape_data(prices_month, num_days, num_periods_day)
+        loads_2d = input.reshape_data(loads_month, num_days, num_periods_day)
 
-        if use_wholesale_prices:
-            prices_2d = [list(x) for x in np.reshape(prices_month, (num_days, num_periods_day))]
-        else:
+        if not use_wholesale_prices:
             prices_month = [0 for _ in range(num_periods)]
             prices_2d = [[0 for _ in range(num_periods_day)] for _ in range(num_days)]
 
-        if use_existing_load:
-            loads_2d = [list(x) for x in np.reshape(loads_month, (num_days, num_periods_day))]
-        else:
+        if not use_existing_load:
             loads_month = [0 for _ in range(num_periods)]
             loads_2d = [[0 for _ in range(num_periods_day)] for _ in range(num_days)]
 
@@ -67,24 +63,20 @@ def main(use_existing_load, use_wholesale_prices):
                                   network_tariff_peak, network_tariff_off_peak)
             max_demand_peak = minizinc_outputs["max_demand_peak"]
             max_demand_off_peak = minizinc_outputs["max_demand_off_peak"]
-            minizinc_outputs_year["Result"] = list(minizinc_outputs.keys())
-            minizinc_outputs_year[month] = [x[0] for x in list(minizinc_outputs.values())]
             print(f"{month} scheduled.")
 
-            # merge data together
+            # merge result data together
             merged_data_dict \
-                = output.merge_results(num_days, charge_ev_day_period, loads_month, prices_month, datetime_month,
-                                max_demand_peak, max_demand_off_peak, peak_periods, off_peak_periods,
-                                network_tariff_peak, network_tariff_off_peak)
+                = output.merge_results(charge_ev_day_period, loads_month, prices_month, datetime_month,
+                                       max_demand_peak, max_demand_off_peak)
 
             # plot monthly charge profile, the existing demand profile, the total demand profile and the prices
             figure_title = f"{month}: peak network tariff = {network_tariff_peak} $/kW, " \
-                f"off peak network tariff = {network_tariff_off_peak} $/kW, " \
-                f"use existing load = {use_existing_load}, " \
-                f"use wholesale prices = {use_wholesale_prices}"
+                           f"off peak network tariff = {network_tariff_off_peak} $/kW, " \
+                           f"use existing load = {use_existing_load}, " \
+                           f"use wholesale prices = {use_wholesale_prices}"
             p_month, data_table \
-                = output.visualise_monthly_results(figure_title, month, datetime_month,
-                                                   network_tariff_peak, network_tariff_off_peak,
+                = output.visualise_monthly_results(figure_title, datetime_month,
                                                    merged_data_dict, prices_month, minizinc_outputs)
             layout_month.extend([p_month, data_table])
 

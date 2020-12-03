@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 
 def read_data(start_time_day, end_time_day,
@@ -21,3 +22,7 @@ def read_data(start_time_day, end_time_day,
     datetimes_year = df_datetimes_year.groupby(pd.Grouper(freq="M"))["Datetime"].apply(list)
 
     return prices_year, loads_year, months_year, datetimes_year
+
+
+def reshape_data(data_array, num_row, num_column):
+    return [list(x) for x in np.reshape(data_array, (num_row, num_column))]
