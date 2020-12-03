@@ -6,6 +6,8 @@ set of int: DAYS = 1 .. num_days;
 
 int: num_periods_day;
 set of int: PERIODS = 1 .. num_periods_day;
+set of int: PEAK_PERIODS;
+set of int: OFF_PEAK_PERIODS;
 
 int: num_evs;
 set of int: EVS = 1 .. num_evs;
@@ -15,11 +17,14 @@ float: total_energy; %kWh
 
 array[DAYS, PERIODS] of float: existing_loads; %$/kWh
 array[DAYS, PERIODS] of float: wholesale_prices; %$/kWh
-float: network_tariff; %$/kW
+float: network_tariff_peak; %$/kW
+float: network_tariff_off_peak; %$/kW
+
 
 % decision variables
 array[EVS, DAYS, PERIODS] of var 0 .. max_charge: charge_strategy;
-var float: max_demand; 
+var float: max_demand_peak; 
+var float: max_demand_off_peak;
 
 % objective function
 var float: wholesale_cost = sum(d in DAYS) (
@@ -29,7 +34,7 @@ var float: wholesale_cost = sum(d in DAYS) (
      )
 );
 
-var float: network_charge = network_tariff * max_demand;
+var float: network_charge = network_tariff_peak * max_demand_peak + network_tariff_off_peak * max_demand_off_peak;
 var float: objective = wholesale_cost + network_charge;
 
 % charge constraint
@@ -50,8 +55,14 @@ constraint forall (d in DAYS) (
 
 % max demand auxillary variable
 constraint forall (d in DAYS) (
-    forall (p in PERIODS) (
-        max_demand >= (sum (e in EVS) (charge_strategy[e, d, p]) + existing_loads[d, p] * 0.5)
+    forall (p in PEAK_PERIODS) (
+        max_demand_peak >= (sum (e in EVS) (charge_strategy[e, d, p]) + existing_loads[d, p] * 0.5)
+    )
+);
+
+constraint forall (d in DAYS) (
+    forall (p in OFF_PEAK_PERIODS) (
+        max_demand_off_peak >= (sum (e in EVS) (charge_strategy[e, d, p]) + existing_loads[d, p] * 0.5)
     )
 );
 
@@ -61,7 +72,8 @@ output [
 "{" ++
 "\"wholesale_cost\":[" ++ show(wholesale_cost) ++ "]," ++
 "\"network_charge\":["  ++ show(network_charge) ++ "]," ++
-"\"max_demand\":["  ++ show(max_demand) ++ "]," ++
+"\"max_demand_peak\":["  ++ show(max_demand_peak) ++ "]," ++
+"\"max_demand_off_peak\":["  ++ show(max_demand_off_peak) ++ "]," ++
 "}"
 ];
 

@@ -1,0 +1,216 @@
+\documentclass[a4paper]{llncs}
+\let\proof\relax
+\let\endproof\relax
+\usepackage{amsmath,amsfonts,amssymb,amsthm,epsfig,epstopdf,url,array}
+\usepackage[latin1]{inputenc}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{tabularx}
+\usepackage{times}
+\usepackage[scaled=0.92]{helvet}
+
+\ifx\pdftexversion\undefined
+% \usepackage[dvips]{graphicx}
+\usepackage[dvips,usenames]{color}
+\else
+% \usepackage[pdftex]{graphicx}
+\usepackage[pdftex,usenames,dvipsnames]{color}
+\fi
+\usepackage[tight,TABTOPCAP]{subfigure}
+\ExecuteOptions{tight,TABTOPCAP}
+
+
+%%AR syntax highlighting for MiniZinc
+\input{minizinc.tex}
+
+%opening
+\title{EV Scheduling Problem}
+\author{Dora Shan He}
+
+\institute{
+	Monash University
+	\\\texttt{dora.shan.he@gmail.com}}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Method}
+
+The optimisation problem was modelled in MinZinc (see~\ref{model:mip}) and solved by an open-source mixed-integer programming solver called COIN-BC. The algorithm was written in Python 3.7. 
+
+\begin{figure}[hp!]
+	\centering
+	\caption{Optimisation model for solving the EV scheduling problem}
+	\label{model:mip}
+	% ======== MIP model for the single-DSP ========== %
+	\begin{lstlisting}[language=minizinc,escapeinside={(*@}{@*)}]
+		
+		include "globals.mzn";
+		
+		% parameters
+		int: num_days;
+		set of int: DAYS = 1 .. num_days;
+		
+		int: num_periods_day;
+		set of int: PERIODS = 1 .. num_periods_day;
+		set of int: PEAK_PERIODS;
+		set of int: OFF_PEAK_PERIODS;
+		
+		int: num_evs;
+		set of int: EVS = 1 .. num_evs;
+		float: max_charge; %kW
+		float: total_energy; %kWh
+		
+		array[DAYS, PERIODS] of float: existing_loads; %$/kWh
+		array[DAYS, PERIODS] of float: wholesale_prices; %$/kWh
+		float: network_tariff_peak; %$/kW
+		float: network_tariff_off_peak; %$/kW
+		
+		% decision variables
+		array[EVS, DAYS, PERIODS] of var 0 .. max_charge: charge_strategy;
+		var float: max_demand_peak; 
+		var float: max_demand_off_peak;
+		
+		% objective function
+		var float: wholesale_cost = sum(d in DAYS) (
+		sum(p in PERIODS) (
+		0.001 * wholesale_prices[d, p] * 
+		(sum(e in EVS) (charge_strategy[e, d, p]) * 0.5 + existing_loads[d, p] )
+		));
+		
+		var float: network_charge = network_tariff_peak * max_demand_peak + network_tariff_off_peak * max_demand_off_peak;
+		var float: objective = wholesale_cost + network_charge;
+		
+		% charge constraint
+		constraint forall (d in DAYS) (
+		forall (p in PERIODS) (
+		forall (e in EVS) (
+		0 <= charge_strategy[e, d, p] /\ charge_strategy[e, d, p] <= max_charge
+		)));
+		
+		% energy constraint
+		constraint forall (d in DAYS) (
+		forall (e in EVS) (
+		sum (p in PERIODS) (charge_strategy[e, d, p] * 0.5) == 20
+		));
+		
+		% max demand auxillary variable
+		constraint forall (d in DAYS) (
+		forall (p in PEAK_PERIODS) (
+		max_demand_peak >= (sum (e in EVS) (charge_strategy[e, d, p]) + existing_loads[d, p] * 0.5)
+		));
+		
+		constraint forall (d in DAYS) (
+		forall (p in OFF_PEAK_PERIODS) (
+		max_demand_off_peak >= (sum (e in EVS) (charge_strategy[e, d, p]) + existing_loads[d, p] * 0.5)
+		));
+		
+		solve minimize objective;
+		
+		output [
+		"{" ++
+			"\"wholesale_cost\":[" ++ show(wholesale_cost) ++ "]," ++
+			"\"network_charge\":["  ++ show(network_charge) ++ "]," ++
+			"\"max_demand_peak\":["  ++ show(max_demand_peak) ++ "]," ++
+			"\"max_demand_off_peak\":["  ++ show(max_demand_off_peak) ++ "]," ++
+			"}"
+		];
+	\end{lstlisting}
+\end{figure}
+
+
+\section{Experiments}
+
+The experiments investigated the impacts on the total demand when charging ten EVs during the day for 12 months from March 2019 to Feb 2020. Specifically, these experiments focus on the impacts of changing the following parameters:
+
+\begin{enumerate}
+	\item whether a total demand profile of a facility is included,
+	\item whether the wholesale prices are applied,
+	\item whether a network tariff is applied to the peak  periods (4pm -- 9pm),
+	\item whether network tariffs are applied to the peak periods and the off-peak periods (outside 4pm -- 9pm).
+\end{enumerate}
+
+\subsubsection{Data}
+The input data for the experiments are a year's total demand profile of a facility and a year's wholesale prices of the national electricity market.  The network tariff data used is as Table~\ref{tab:network-tariff}:
+\begin{table}[tbph]
+	\caption{Network tariff}
+	\label{tab:network-tariff}
+	\begin{tabularx}\linewidth{XXX}
+		\hline
+		Experiment & Peak period tariff(\$/kW) & Off-peak periods tariff (\$/kW)\\
+		\hline
+		1 & 0 & 0 \\
+
+		2 & 15 & 15 \\
+
+		3 & 15 & 3 \\
+
+		4 & 15 & 0 \\
+
+		5 & 0 & 15 \\
+		\hline
+	\end{tabularx}
+\end{table}
+
+\section{Results}
+
+Four files have been generated:
+
+\begin{enumerate}
+	\item existing-load-False-wholesale-price-False-year.html
+	\item existing-load-True-wholesale-price-True-year.html
+	\item existing-load-True-wholesale-price-False-year.html
+	\item existing-load-False-wholesale-price-True-year.html
+\end{enumerate}
+
+
+\section{Findings}
+
+The findings from the results are as follows:
+
+\begin{enumerate}
+	\item From \textit{existing-load-False-wholesale-price-False-year.html}:
+	
+	\begin{enumerate}
+		\item 00 peak tariff, 00 off-peak tariff --- each EV charges freely at times that the solver finds feasible. 
+		\item 15 peak tariff, 15 off-peak tariff --- the aggregate charging profile of all EV is flat at all time. 
+		\item 15 peak tariff, 03 off-peak tariff --- the EVs only charge at off peak periods and the aggregate charging profile of all EV is flat during those periods. 
+		\item 15 peak tariff, 00 off-peak tariff --- the EVs only charge at off peak periods and though each EV charges freely at times that the solver finds feasible.
+		\item 00 peak tariff, 15 off-peak tariff --- each EV charges at maximum rate during the limited peak periods. 
+	\end{enumerate}
+
+	\item From \textit{existing-load-True-wholesale-price-True-year.html}:
+	
+		\begin{enumerate}
+		\item 00 peak tariff, 00 off-peak tariff --- each EV charges freely at times that the solver finds feasible. 
+		\item 15 peak tariff, 15 off-peak tariff --- each EV charges carefully to maintain the maximum aggregate demand (EVs + existing) at a certain level.
+		\item 15 peak tariff, 03 off-peak tariff --- each EV charges carefully to maintain the maximum aggregate demand (EVs + existing) at peak/off-peak periods at a certain level. The maximum aggregate demand at peak periods is \underline{less than two times} lower than that of the off peak periods. 
+		\item 15 peak tariff, 00 off-peak tariff --- each EV charges carefully to maintain the maximum aggregate demand (EVs + existing) at peak periods at a certain level. The maximum aggregate demand at off-peak periods is \underline{more than fives} times higher than that of the peak periods.
+		\item 00 peak tariff, 15 off-peak tariff --- each EV charges carefully to maintain the maximum aggregate demand (EVs + existing) at off peak periods at a certain level. The maximum aggregate demand at peak periods is \underline{more than fives times} higher than that of the off-peak periods. 
+	\end{enumerate}
+
+	\item From \textit{existing-load-True-wholesale-price-False-year.html}:
+	
+	\begin{enumerate}
+		\item 00 peak tariff, 00 off-peak tariff --- each EV charges freely at times that the solver finds feasible. 
+		\item 15 peak tariff, 15 off-peak tariff --- each EV charges carefully to maintain the maximum aggregate demand (EVs + existing) at a certain level. 
+		\item 15 peak tariff, 03 off-peak tariff --- each EV charges carefully to maintain the maximum aggregate demand (EVs + existing) at peak/off-peak periods at a certain level. The maximum aggregate demand at peak periods is less than two times lower than that of the off peak periods. 
+		\item 15 peak tariff, 00 off-peak tariff --- each EV charges carefully to maintain the maximum aggregate demand (EVs + existing) at peak periods at a certain level. The maximum aggregate demand at off-peak periods is \underline{about four} times higher than that of the peak periods. 
+		\item 00 peak tariff, 15 off-peak tariff --- each EV charges carefully to maintain the maximum aggregate demand (EVs + existing) at off peak periods at a certain level. The maximum aggregate demand at peak periods is \underline{more than fives times} higher than that of the off-peak periods. 
+	\end{enumerate}
+	
+	\item From \textit{existing-load-False-wholesale-price-True-year.html}:
+	
+	\begin{enumerate}
+		\item 00 peak tariff, 00 off-peak tariff --- each EV charges at the maximum rate at the cheapest times.
+		\item 15 peak tariff, 15 off-peak tariff --- the aggregate charging profile of all EV is flat at all time.
+		\item 15 peak tariff, 03 off-peak tariff --- each EV charges at off peak periods only and it charges carefully to maintain the maximum aggregate demand at off-peak periods at a certain level.
+		\item 15 peak tariff, 00 off-peak tariff --- each EV charges at the cheapest times during the off peak periods. 
+		\item 00 peak tariff, 15 off-peak tariff --- each EV charges at the maximum rate during the limited peak periods. 
+	\end{enumerate}
+	
+\end{enumerate}
+
+\end{document}
