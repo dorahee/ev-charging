@@ -73,6 +73,6 @@ def visualise_monthly_results(figure_title, month, datetime_month, network_tarif
     datatable_source = ColumnDataSource(data=minizinc_outputs)
     columns = [TableColumn(field=k, title=k.replace("_", " "), formatter=NumberFormatter(format='0.00'))
                for k in minizinc_outputs.keys()]
-    data_table = DataTable(source=datatable_source, columns=columns, width=2000, height=50)
+    data_table = DataTable(source=datatable_source, columns=columns, width=2000, height=80)
 
     return p_month, data_table
