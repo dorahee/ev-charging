@@ -1,4 +1,4 @@
-# ev-charging
+# EV Scheduling
 
 Dependencies:
 
