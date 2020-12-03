@@ -56,13 +56,13 @@ constraint forall (d in DAYS) (
 % max demand auxillary variable
 constraint forall (d in DAYS) (
     forall (p in PEAK_PERIODS) (
-        max_demand_peak >= (sum (e in EVS) (charge_strategy[e, d, p]) + existing_loads[d, p] / 0.5)
+        max_demand_peak >= (sum (e in EVS) (charge_strategy[e, d, p]) + existing_loads[d, p] * 2)
     )
 );
 
 constraint forall (d in DAYS) (
     forall (p in OFF_PEAK_PERIODS) (
-        max_demand_off_peak >= (sum (e in EVS) (charge_strategy[e, d, p]) + existing_loads[d, p] / 0.5)
+        max_demand_off_peak >= (sum (e in EVS) (charge_strategy[e, d, p]) + existing_loads[d, p] * 2)
     )
 );
 

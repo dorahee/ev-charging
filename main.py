@@ -4,10 +4,14 @@ from bokeh.layouts import layout
 from bokeh.models import *
 from bokeh.plotting import figure, output_file
 from bokeh.palettes import Set2
-from datetime import datetime
+from datetime import datetime, date
 import scripts.ev_scheduling as ev
 import scripts.import_data as input
 import scripts.output_data as output
+
+this_date = str(date.today())
+this_time = str(datetime.now().time().strftime("%H-%M-%S"))
+this_date_time = f"{this_date}-{this_time}"
 
 # time-related parameters
 start_time_day = "9:00"
@@ -28,7 +32,8 @@ network_tariffs_peak = [15]
 network_tariffs_off_peak = [3]
 
 
-def merge_results(num_days, charge_ev_day_period, loads_month, prices_month, max_demand_peak, max_demand_off_peak,
+def merge_results(num_days, charge_ev_day_period, loads_month, prices_month, datetime_month,
+                  max_demand_peak, max_demand_off_peak,
                   peak_periods, off_peak_periods, network_tariff_peak, network_tariff_off_peak):
     # combine results
     charge_month = []
@@ -38,25 +43,25 @@ def merge_results(num_days, charge_ev_day_period, loads_month, prices_month, max
             charge_ev_month.extend(charge_ev_day)
         charge_month.append(charge_ev_month)
     total_charge_month = np.sum(charge_month, axis=0).tolist()
-    demand_month = [x / 0.5 for x in loads_month]
+    demand_month = [x * 2 for x in loads_month]
     total_demand_month = [c + l for c, l in zip(total_charge_month, demand_month)]
     total_periods = len(loads_month)
-    peak_periods = [(i + 1) * x for i in range(num_days) for x in peak_periods]
-    wholesale_cost_month = [x * y * 0.001 for x, y in zip(total_demand_month,prices_month )]
-    network_charge_month = [max_demand_peak[0] * network_tariff_peak
-                   if i in peak_periods else max_demand_off_peak[0] * network_tariff_off_peak
-                   for i in range(total_periods)]
+    peak_periods_month = [v for i, v in enumerate(range(total_periods))
+                          if datetime_month[i].hour >= 16 and datetime_month[i].hour <= 21]
+    wholesale_cost_month = [x * y * 0.001 * 0.5 for x, y in zip(total_demand_month, prices_month)]
+
     combine_data_source_dict = {
+        "Datetime": [timestamp.strftime("%Y-%m-%d %H:%M:%S") for timestamp in datetime_month],
         "Periods": [i for i in range(total_periods)],
         "EVs": total_charge_month,
         "Existing": demand_month,
         "Total": total_demand_month,
         "Prices": prices_month,
-        "Max": [max_demand_peak[0] if i in peak_periods else max_demand_off_peak[0] for i in
+        "Max": [max_demand_peak[0] if i in peak_periods_month else max_demand_off_peak[0] for i in
                        range(total_periods)],
         "WCost": wholesale_cost_month,
-        "NCharge": network_charge_month,
-        "Obj": [x + y for x, y in zip(wholesale_cost_month, network_charge_month)],
+        # "NCharge": network_charge_month,
+        # "Obj": [x + y for x, y in zip(wholesale_cost_month, network_charge_month)],
     }
 
     return combine_data_source_dict
@@ -77,7 +82,7 @@ def main(use_existing_load, use_wholesale_prices):
         num_periods = len(prices_month)
 
         if use_wholesale_prices:
-            prices_2d = [list(x) for x in np.reshape(loads_month, (num_days, num_periods_day))]
+            prices_2d = [list(x) for x in np.reshape(prices_month, (num_days, num_periods_day))]
         else:
             prices_month = [0 for _ in range(num_periods)]
             prices_2d = [[0 for _ in range(num_periods_day)] for _ in range(num_days)]
@@ -103,7 +108,7 @@ def main(use_existing_load, use_wholesale_prices):
 
             # merge data together
             merged_data_dict \
-                = merge_results(num_days, charge_ev_day_period, loads_month, prices_month,
+                = merge_results(num_days, charge_ev_day_period, loads_month, prices_month, datetime_month,
                                 max_demand_peak, max_demand_off_peak, peak_periods, off_peak_periods,
                                 network_tariff_peak, network_tariff_off_peak)
 
@@ -124,7 +129,7 @@ def main(use_existing_load, use_wholesale_prices):
     # save plots
     print("Saving plots...")
 
-    output_file(f"results/existing-load-{use_existing_load}-wholesale-price-{use_wholesale_prices}-year.html")
+    output_file(f"results/{this_date_time}-existing-{use_existing_load}-price-{use_wholesale_prices}-year.html")
     output_graph = layout(row(Tabs(tabs=tab_year)), sizing_mode="scale_width")
     save(output_graph)
     show(output_graph)
