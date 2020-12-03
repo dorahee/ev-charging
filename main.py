@@ -24,10 +24,12 @@ total_energy = 20  # kWh
 # tariffs or prices-related parameters
 network_tariffs_peak = [0, 15, 15, 15, 0]
 network_tariffs_off_peak = [0, 15, 3, 0, 15]
+network_tariffs_peak = [15]
+network_tariffs_off_peak = [3]
 
 
 def merge_results(num_days, charge_ev_day_period, loads_month, prices_month, max_demand_peak, max_demand_off_peak,
-                  peak_periods, off_peak_periods):
+                  peak_periods, off_peak_periods, network_tariff_peak, network_tariff_off_peak):
     # combine results
     charge_month = []
     for charge_ev in charge_ev_day_period:
@@ -40,14 +42,21 @@ def merge_results(num_days, charge_ev_day_period, loads_month, prices_month, max
     total_demand_month = [c + l for c, l in zip(total_charge_month, demand_month)]
     total_periods = len(loads_month)
     peak_periods = [(i + 1) * x for i in range(num_days) for x in peak_periods]
+    wholesale_cost_month = [x * y * 0.001 for x, y in zip(total_demand_month,prices_month )]
+    network_charge_month = [max_demand_peak[0] * network_tariff_peak
+                   if i in peak_periods else max_demand_off_peak[0] * network_tariff_off_peak
+                   for i in range(total_periods)]
     combine_data_source_dict = {
         "Periods": [i for i in range(total_periods)],
         "EVs": total_charge_month,
         "Existing": demand_month,
         "Total": total_demand_month,
         "Prices": prices_month,
-        "Max_demand": [max_demand_peak if i in peak_periods else max_demand_off_peak for i in
-                       range(total_periods)]
+        "Max": [max_demand_peak[0] if i in peak_periods else max_demand_off_peak[0] for i in
+                       range(total_periods)],
+        "WCost": wholesale_cost_month,
+        "NCharge": network_charge_month,
+        "Obj": [x + y for x, y in zip(wholesale_cost_month, network_charge_month)],
     }
 
     return combine_data_source_dict
@@ -95,7 +104,8 @@ def main(use_existing_load, use_wholesale_prices):
             # merge data together
             merged_data_dict \
                 = merge_results(num_days, charge_ev_day_period, loads_month, prices_month,
-                                max_demand_peak, max_demand_off_peak, peak_periods, off_peak_periods)
+                                max_demand_peak, max_demand_off_peak, peak_periods, off_peak_periods,
+                                network_tariff_peak, network_tariff_off_peak)
 
             # plot monthly charge profile, the existing demand profile, the total demand profile and the prices
             figure_title = f"{month}: peak network tariff = {network_tariff_peak} $/kW, " \
@@ -123,6 +133,6 @@ def main(use_existing_load, use_wholesale_prices):
 
 if __name__ == '__main__':
 
-    for use_existing_load in [True, False]:
-        for use_wholesale_prices in [True, False]:
+    for use_existing_load in [True]:
+        for use_wholesale_prices in [True]:
             main(use_existing_load, use_wholesale_prices)

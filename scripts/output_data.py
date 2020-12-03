@@ -34,13 +34,15 @@ def visualise_monthly_results(figure_title, month, datetime_month, network_tarif
 
     colour_index = -1
     legend_items = []
+    tooltips = []
     for k, v in data_source_dict.items():
-        if "Per" not in k:
+        if "Per" not in k and "Cost" not in k and "Obj" not in k and "Char" not in k:
             colour_index += 1
             if "Pri" not in k:
                 pl = p_month.line(y=k, x='Periods',
                                   source=bokeh_data_source, line_width=2,
                                   color=colour_choices[colour_index])
+                tooltips.append((f'{k}', f"@{k} kW"))
 
             else:
                 p_month.extra_y_ranges = {"WholesalePrices": Range1d(start=min(prices_month), end=max(prices_month))}
@@ -48,7 +50,14 @@ def visualise_monthly_results(figure_title, month, datetime_month, network_tarif
                 pl = p_month.line(y=k, x='Periods',
                                   source=bokeh_data_source, line_width=2, line_dash="dashed",
                                   y_range_name='WholesalePrices', color=colour_choices[colour_index])
+                tooltips.append((f'{k}', f"@{k} $/MWh"))
+                hover1 = HoverTool(renderers=[pl], tooltips=tooltips, point_policy='follow_mouse',
+                                   mode='vline')
+                p_month.add_tools(hover1)
+
             legend_items.append((k, [pl]))
+        else:
+            tooltips.append((f'{k}', f"@{k}"))
 
     legend = Legend(items=legend_items, location="center", orientation="horizontal", click_policy="hide")
     p_month.add_layout(legend, 'above')

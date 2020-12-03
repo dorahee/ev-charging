@@ -3,17 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="669a99e7-5066-4023-a021-5648861b327e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/doc.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/doc.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/doc/doc.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/doc.tex" beforeDir="false" afterPath="$PROJECT_DIR$/doc/doc.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/existing-load-False-wholesale-price-False-year.html" beforeDir="false" afterPath="$PROJECT_DIR$/results/existing-load-False-wholesale-price-False-year.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/results/existing-load-False-wholesale-price-True-year.html" beforeDir="false" afterPath="$PROJECT_DIR$/results/existing-load-False-wholesale-price-True-year.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/results/existing-load-True-wholesale-price-False-year.html" beforeDir="false" afterPath="$PROJECT_DIR$/results/existing-load-True-wholesale-price-False-year.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/results/existing-load-True-wholesale-price-True-year.html" beforeDir="false" afterPath="$PROJECT_DIR$/results/existing-load-True-wholesale-price-True-year.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/ev_scheduling.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/ev_scheduling.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/output_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/output_data.py" afterDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/deprecated/" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,34 +17,6 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/ev_charging$scenario2.coverage" NAME="scenario2 Coverage Results" MODIFIED="1606918354091" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/ev_charging$scenario3.coverage" NAME="scenario3 Coverage Results" MODIFIED="1606970534470" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="514">
-              <caret line="89" column="73" selection-start-line="89" selection-start-column="73" selection-end-line="89" selection-end-column="73" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/ev_scheduling.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="811">
-              <caret line="32" column="24" lean-forward="true" selection-start-line="32" selection-start-column="24" selection-end-line="32" selection-end-column="24" />
-              <folding>
-                <element signature="e#0#22#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -61,56 +28,8 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/scripts/ev-scheduling.py" />
-        <option value="$PROJECT_DIR$/scripts/import_data.py" />
-        <option value="$PROJECT_DIR$/scenario3.py" />
-        <option value="$PROJECT_DIR$/scripts/output_data.py" />
-        <option value="$PROJECT_DIR$/all-scenarios.py" />
-        <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/doc.tex" />
-        <option value="$PROJECT_DIR$/scripts/ev_scheduling.py" />
-      </list>
-    </option>
-  </component>
   <component name="JupyterTrust" id="a62f4560-9ff6-4330-8b73-6f74c00aafee" />
-  <component name="ProjectFrameBounds">
-    <option name="y" value="49" />
-    <option name="width" value="2560" />
-    <option name="height" value="1364" />
-  </component>
   <component name="ProjectId" id="1l6e4rutF2k2NgGFLqugwfySO4O" />
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="ev-charging" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ev-charging" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ev-charging" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ev-charging" type="462c0819:PsiDirectoryNode" />
-              <item name="results" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ev-charging" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ev-charging" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-    </panes>
-  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -132,19 +51,29 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
   <component name="RunManager" selected="Python.scenario3">
+    <configuration name="output_data" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="ev-charging" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/output_data.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="scenario2" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="ev-charging" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -192,11 +121,12 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.scenario3" />
+        <item itemvalue="Python.output_data" />
         <item itemvalue="Python.scenario2" />
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -210,59 +140,54 @@
       <workItem from="1606916540611" duration="1837000" />
       <workItem from="1606921785024" duration="2333000" />
       <workItem from="1606970265931" duration="447000" />
+      <workItem from="1606983401192" duration="4520000" />
     </task>
     <servers />
   </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9228000" />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="0" y="49" width="2560" height="1364" extended-state="0" />
-    <editor active="true" />
-    <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2547847" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32983023" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32983023" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39935327" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" />
-      <window_info anchor="bottom" id="Python Console" order="12" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" weight="0.32974482" />
-      <window_info anchor="right" id="Database" order="4" />
-    </layout>
-  </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1494" height="234" key="GridCell.Tab.0.bottom" timestamp="1606958194485">
+    <state width="1536" height="438" key="DebuggerActiveHint" timestamp="1606985410806">
       <screen x="0" y="23" width="1536" height="887" />
     </state>
-    <state width="1494" height="234" key="GridCell.Tab.0.bottom/0.23.1536.887@0.23.1536.887" timestamp="1606958194485" />
-    <state width="1494" height="234" key="GridCell.Tab.0.center" timestamp="1606958194484">
+    <state width="1536" height="438" key="DebuggerActiveHint/0.23.1536.887@0.23.1536.887" timestamp="1606985410806" />
+    <state width="1494" height="289" key="GridCell.Tab.0.bottom" timestamp="1606996360011">
       <screen x="0" y="23" width="1536" height="887" />
     </state>
-    <state width="1494" height="234" key="GridCell.Tab.0.center/0.23.1536.887@0.23.1536.887" timestamp="1606958194484" />
-    <state width="1494" height="234" key="GridCell.Tab.0.left" timestamp="1606958194484">
+    <state width="1494" height="289" key="GridCell.Tab.0.bottom/0.23.1536.887@0.23.1536.887" timestamp="1606996360011" />
+    <state width="1494" height="289" key="GridCell.Tab.0.center" timestamp="1606996360010">
       <screen x="0" y="23" width="1536" height="887" />
     </state>
-    <state width="1494" height="234" key="GridCell.Tab.0.left/0.23.1536.887@0.23.1536.887" timestamp="1606958194484" />
-    <state width="1494" height="234" key="GridCell.Tab.0.right" timestamp="1606958194484">
+    <state width="1494" height="289" key="GridCell.Tab.0.center/0.23.1536.887@0.23.1536.887" timestamp="1606996360010" />
+    <state width="1494" height="289" key="GridCell.Tab.0.left" timestamp="1606996360010">
       <screen x="0" y="23" width="1536" height="887" />
     </state>
-    <state width="1494" height="234" key="GridCell.Tab.0.right/0.23.1536.887@0.23.1536.887" timestamp="1606958194484" />
+    <state width="1494" height="289" key="GridCell.Tab.0.left/0.23.1536.887@0.23.1536.887" timestamp="1606996360010" />
+    <state width="1494" height="289" key="GridCell.Tab.0.right" timestamp="1606996360010">
+      <screen x="0" y="23" width="1536" height="887" />
+    </state>
+    <state width="1494" height="289" key="GridCell.Tab.0.right/0.23.1536.887@0.23.1536.887" timestamp="1606996360010" />
+    <state width="1494" height="289" key="GridCell.Tab.1.bottom" timestamp="1606996360013">
+      <screen x="0" y="23" width="1536" height="887" />
+    </state>
+    <state width="1494" height="289" key="GridCell.Tab.1.bottom/0.23.1536.887@0.23.1536.887" timestamp="1606996360013" />
+    <state width="1494" height="289" key="GridCell.Tab.1.center" timestamp="1606996360011">
+      <screen x="0" y="23" width="1536" height="887" />
+    </state>
+    <state width="1494" height="289" key="GridCell.Tab.1.center/0.23.1536.887@0.23.1536.887" timestamp="1606996360011" />
+    <state width="1494" height="289" key="GridCell.Tab.1.left" timestamp="1606996360011">
+      <screen x="0" y="23" width="1536" height="887" />
+    </state>
+    <state width="1494" height="289" key="GridCell.Tab.1.left/0.23.1536.887@0.23.1536.887" timestamp="1606996360011" />
+    <state width="1494" height="289" key="GridCell.Tab.1.right" timestamp="1606996360013">
+      <screen x="0" y="23" width="1536" height="887" />
+    </state>
+    <state width="1494" height="289" key="GridCell.Tab.1.right/0.23.1536.887@0.23.1536.887" timestamp="1606996360013" />
+    <state width="768" height="443" key="XDebugger.FullValuePopup" timestamp="1606985764534">
+      <screen x="0" y="23" width="1536" height="887" />
+    </state>
+    <state width="768" height="443" key="XDebugger.FullValuePopup/0.23.1536.887@0.23.1536.887" timestamp="1606985764534" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -277,6 +202,11 @@
           <line>203</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main.py</url>
+          <line>61</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
@@ -289,6 +219,8 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ev_charging$scenario2.coverage" NAME="scenario2 Coverage Results" MODIFIED="1606923503825" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ev_charging$output_data.coverage" NAME="output_data Coverage Results" MODIFIED="1606983511935" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scripts" />
+    <SUITE FILE_PATH="coverage/ev_charging$scenario3.coverage" NAME="scenario3 Coverage Results" MODIFIED="1606988086546" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
@@ -308,59 +240,6 @@
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
     </expressions>
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/deprecated/scenario2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1810">
-          <caret line="213" selection-start-line="213" selection-end-line="213" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/deprecated/scenario2-existing.dzn">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/import_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/output_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="26" column="17" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/doc.tex" />
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="514">
-          <caret line="89" column="73" selection-start-line="89" selection-start-column="73" selection-end-line="89" selection-end-column="73" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/ev_scheduling.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="811">
-          <caret line="32" column="24" lean-forward="true" selection-start-line="32" selection-start-column="24" selection-end-line="32" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
   </component>
   <component name="masterDetails">
     <states>
