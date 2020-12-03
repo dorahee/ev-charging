@@ -17,7 +17,7 @@ def schedule_evs(num_days, num_periods_day, peak_periods, off_peak_periods,
 
     # build a MiniZinc model
     model = mzn.Model(model_file)
-    solver = mzn.Solver.lookup("coin-bc")
+    solver = mzn.Solver.lookup("mip")
     ins = mzn.Instance(solver, model)
     ins["num_days"] = num_days
     ins["num_periods_day"] = num_periods_day
