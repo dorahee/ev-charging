@@ -2,22 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="669a99e7-5066-4023-a021-5648861b327e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/ev_scheduling.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/import_data.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/output_data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ev-charging.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ev-charging.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demands_year.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario2-existing.dzn" beforeDir="false" afterPath="$PROJECT_DIR$/deprecated/scenario2-existing.dzn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario2-existing.mzn" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/ev-scheduling.mzn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario2.dzn" beforeDir="false" afterPath="$PROJECT_DIR$/deprecated/scenario2.dzn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario2.mzn" beforeDir="false" afterPath="$PROJECT_DIR$/deprecated/scenario2.mzn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario2.py" beforeDir="false" afterPath="$PROJECT_DIR$/deprecated/scenario2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario3.dzn" beforeDir="false" afterPath="$PROJECT_DIR$/deprecated/scenario3.dzn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario3.mzn" beforeDir="false" afterPath="$PROJECT_DIR$/deprecated/scenario3.mzn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc.tex" beforeDir="false" afterPath="$PROJECT_DIR$/doc.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/existing-load-False-wholesale-price-False-year.html" beforeDir="false" afterPath="$PROJECT_DIR$/results/existing-load-False-wholesale-price-False-year.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/existing-load-False-wholesale-price-True-year.html" beforeDir="false" afterPath="$PROJECT_DIR$/results/existing-load-False-wholesale-price-True-year.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/existing-load-True-wholesale-price-False-year.html" beforeDir="false" afterPath="$PROJECT_DIR$/results/existing-load-True-wholesale-price-False-year.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/existing-load-True-wholesale-price-True-year.html" beforeDir="false" afterPath="$PROJECT_DIR$/results/existing-load-True-wholesale-price-True-year.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/ev-scheduling.mzn" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/ev-scheduling.mzn" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,15 +17,15 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/ev_charging$scenario2.coverage" NAME="scenario2 Coverage Results" MODIFIED="1606918354091" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/ev_charging$scenario3.coverage" NAME="scenario3 Coverage Results" MODIFIED="1606964344086" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ev_charging$scenario3.coverage" NAME="scenario3 Coverage Results" MODIFIED="1606968761923" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="393">
-              <caret line="26" selection-start-line="26" selection-end-line="26" />
+            <state relative-caret-position="471">
+              <caret line="36" column="44" selection-start-line="36" selection-start-column="44" selection-end-line="36" selection-end-column="44" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -42,34 +33,16 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/output_data.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/doc.tex">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="282">
-              <caret line="26" column="17" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
+            <state relative-caret-position="564">
+              <caret line="211" column="19" lean-forward="true" selection-start-line="211" selection-start-column="19" selection-end-line="211" selection-end-column="19" />
               <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/import_data.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="15" selection-start-line="15" selection-end-line="15" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/ev_scheduling.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="13" column="9" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
-              <folding>
-                <element signature="e#0#22#0" expanded="true" />
+                <element signature="e#68#138#2" expanded="true" />
+                <element signature="e#348#382#2" expanded="true" />
+                <element signature="e#421#467#2" expanded="true" />
+                <element signature="e#472#511#2" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -97,6 +70,7 @@
         <option value="$PROJECT_DIR$/all-scenarios.py" />
         <option value="$PROJECT_DIR$/scripts/ev_scheduling.py" />
         <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/doc.tex" />
       </list>
     </option>
   </component>
@@ -125,6 +99,11 @@
               <item name="ev-charging" type="b2602c69:ProjectViewProjectNode" />
               <item name="ev-charging" type="462c0819:PsiDirectoryNode" />
               <item name="results" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ev-charging" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ev-charging" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -234,18 +213,18 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6945000" />
+    <option name="totallyTimeSpent" value="8395000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="27" y="23" width="2560" height="1364" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25239235" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25239235" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32983023" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32983023" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32983023" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39935327" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -371,10 +350,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
-          <caret line="26" selection-start-line="26" selection-end-line="26" />
+        <state relative-caret-position="471">
+          <caret line="36" column="44" selection-start-line="36" selection-start-column="44" selection-end-line="36" selection-end-column="44" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc.tex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="564">
+          <caret line="211" column="19" lean-forward="true" selection-start-line="211" selection-start-column="19" selection-end-line="211" selection-end-column="19" />
+          <folding>
+            <element signature="e#68#138#2" expanded="true" />
+            <element signature="e#348#382#2" expanded="true" />
+            <element signature="e#421#467#2" expanded="true" />
+            <element signature="e#472#511#2" expanded="true" />
           </folding>
         </state>
       </provider>

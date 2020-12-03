@@ -36,7 +36,7 @@ def merge_results(num_days, charge_ev_day_period, loads_month, prices_month, max
             charge_ev_month.extend(charge_ev_day)
         charge_month.append(charge_ev_month)
     total_charge_month = np.sum(charge_month, axis=0).tolist()
-    demand_month = [x * 0.5 for x in loads_month]
+    demand_month = [x / 0.5 for x in loads_month]
     total_demand_month = [c + l for c, l in zip(total_charge_month, demand_month)]
     total_periods = len(loads_month)
     peak_periods = [(i + 1) * x for i in range(num_days) for x in peak_periods]

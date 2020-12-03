@@ -1,4 +1,4 @@
-\documentclass[a4paper]{llncs}
+\documentclass[a4paper, oneandhalfspace]{llncs}
 \let\proof\relax
 \let\endproof\relax
 \usepackage{amsmath,amsfonts,amssymb,amsthm,epsfig,epstopdf,url,array}
@@ -184,30 +184,30 @@ The findings from the results are as follows:
 	\item From \textit{existing-load-True-wholesale-price-True-year.html}:
 	
 		\begin{enumerate}
-		\item 00 peak tariff, 00 off-peak tariff --- each EV charges freely at times that the solver finds feasible. 
-		\item 15 peak tariff, 15 off-peak tariff --- each EV charges carefully to maintain the maximum aggregate demand (EVs + existing) at a certain level.
+		\item 00 peak tariff, 00 off-peak tariff --- everyday each EV charges at the cheapest times possible.
+		\item 15 peak tariff, 15 off-peak tariff --- each EV charges carefully to maintain the maximum aggregate demand (EVs + existing) at all times at a certain level.
 		\item 15 peak tariff, 03 off-peak tariff --- each EV charges carefully to maintain the maximum aggregate demand (EVs + existing) at peak/off-peak periods at a certain level. The maximum aggregate demand at peak periods is \underline{less than two times} lower than that of the off peak periods. 
-		\item 15 peak tariff, 00 off-peak tariff --- each EV charges carefully to maintain the maximum aggregate demand (EVs + existing) at peak periods at a certain level. The maximum aggregate demand at off-peak periods is \underline{more than fives} times higher than that of the peak periods.
-		\item 00 peak tariff, 15 off-peak tariff --- each EV charges carefully to maintain the maximum aggregate demand (EVs + existing) at off peak periods at a certain level. The maximum aggregate demand at peak periods is \underline{more than fives times} higher than that of the off-peak periods. 
+		\item 15 peak tariff, 00 off-peak tariff --- each EV charges carefully to maintain the maximum aggregate demand (EVs + existing) at peak periods at a certain level. The maximum aggregate demand at off-peak periods is \underline{more than two times} higher than that of the peak periods.
+		\item 00 peak tariff, 15 off-peak tariff --- each EV charges carefully to maintain the maximum aggregate demand (EVs + existing) at off peak periods at a certain level. The maximum aggregate demand at peak periods is \underline{more than two times} higher than that of the off-peak periods.
 	\end{enumerate}
 
 	\item From \textit{existing-load-True-wholesale-price-False-year.html}:
 	
 	\begin{enumerate}
 		\item 00 peak tariff, 00 off-peak tariff --- each EV charges freely at times that the solver finds feasible. 
-		\item 15 peak tariff, 15 off-peak tariff --- each EV charges carefully to maintain the maximum aggregate demand (EVs + existing) at a certain level. 
-		\item 15 peak tariff, 03 off-peak tariff --- each EV charges carefully to maintain the maximum aggregate demand (EVs + existing) at peak/off-peak periods at a certain level. The maximum aggregate demand at peak periods is less than two times lower than that of the off peak periods. 
-		\item 15 peak tariff, 00 off-peak tariff --- each EV charges carefully to maintain the maximum aggregate demand (EVs + existing) at peak periods at a certain level. The maximum aggregate demand at off-peak periods is \underline{about four} times higher than that of the peak periods. 
-		\item 00 peak tariff, 15 off-peak tariff --- each EV charges carefully to maintain the maximum aggregate demand (EVs + existing) at off peak periods at a certain level. The maximum aggregate demand at peak periods is \underline{more than fives times} higher than that of the off-peak periods. 
+		\item 15 peak tariff, 15 off-peak tariff --- each EV charges carefully to maintain the maximum aggregate demand (EVs + existing) at all times at a certain level.
+		\item 15 peak tariff, 03 off-peak tariff --- each EV charges carefully to maintain the maximum aggregate demand (EVs + existing) at peak/off-peak periods at a certain level. The maximum aggregate demand at peak periods is \underline{less than two times} lower than that of the off peak periods.
+		\item 15 peak tariff, 00 off-peak tariff --- each EV charges carefully to maintain the maximum aggregate demand (EVs + existing) at peak periods at a certain level. The maximum aggregate demand at off-peak periods is \underline{less than two times} higher than that of the peak periods.
+		\item 00 peak tariff, 15 off-peak tariff --- each EV charges carefully to maintain the maximum aggregate demand (EVs + existing) at off peak periods at a certain level. The maximum aggregate demand at peak periods is \underline{less than two times} higher than that of the off-peak periods.
 	\end{enumerate}
 	
 	\item From \textit{existing-load-False-wholesale-price-True-year.html}:
 	
 	\begin{enumerate}
-		\item 00 peak tariff, 00 off-peak tariff --- each EV charges at the maximum rate at the cheapest times.
+		\item 00 peak tariff, 00 off-peak tariff --- everyday each EV charges at the maximum rate at the cheapest times possible.
 		\item 15 peak tariff, 15 off-peak tariff --- the aggregate charging profile of all EV is flat at all time.
 		\item 15 peak tariff, 03 off-peak tariff --- each EV charges at off peak periods only and it charges carefully to maintain the maximum aggregate demand at off-peak periods at a certain level.
-		\item 15 peak tariff, 00 off-peak tariff --- each EV charges at the cheapest times during the off peak periods. 
+		\item 15 peak tariff, 00 off-peak tariff --- each EV charges at the maximum rate at the cheapest times possible during the off peak periods.
 		\item 00 peak tariff, 15 off-peak tariff --- each EV charges at the maximum rate during the limited peak periods. 
 	\end{enumerate}
 	
