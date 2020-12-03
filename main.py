@@ -118,7 +118,7 @@ def main(use_existing_load, use_wholesale_prices):
                                                    merged_data_dict, prices_month, minizinc_outputs)
             layout_month.extend([p_month, data_table])
 
-        tab = Panel(child=layout(layout_month), title=month)
+        tab = Panel(child=layout(layout_month, sizing_mode='scale_width'), title=month)
         tab_year.append(tab)
 
     # save plots
