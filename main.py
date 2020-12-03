@@ -8,9 +8,7 @@ import scripts.ev_scheduling as ev
 import scripts.import_data as input
 import scripts.output_data as output
 
-this_date = str(date.today())
-this_time = str(datetime.now().time().strftime("%H-%M-%S"))
-this_date_time = f"{this_date}-{this_time}"
+now_datetime = str(datetime.now().strftime("%m-%d-%H-%M"))
 
 # time-related parameters
 start_time_day = "9:00"
@@ -20,7 +18,7 @@ peak_periods = {14, 15}
 off_peak_periods = {i for i in range(14)}
 
 # EV-related parameters
-num_evs = 10
+num_evs = 1000
 max_charge = 25  # kW
 total_energy = 20  # kWh
 
@@ -38,9 +36,9 @@ def main(use_existing_load, use_wholesale_prices):
     # start scheduling
     tab_year = []
     for month, datetime_month, prices_month, loads_month in zip(months_year, datetimes_year, prices_year, loads_year):
-        month = month.strftime("%Y-%m")
 
         # prepare input parameters
+        month = month.strftime("%Y-%m")
         num_days = len(set([x.strftime("%Y-%m-%d") for x in datetime_month]))
         num_periods = len(prices_month)
         prices_2d = input.reshape_data(prices_month, num_days, num_periods_day)
@@ -63,7 +61,7 @@ def main(use_existing_load, use_wholesale_prices):
                                   network_tariff_peak, network_tariff_off_peak)
             max_demand_peak = minizinc_outputs["max_demand_peak"]
             max_demand_off_peak = minizinc_outputs["max_demand_off_peak"]
-            print(f"{month} scheduled.")
+            print(f"{month} scheduled in {minizinc_outputs['time (ms)']}.")
 
             # merge result data together
             merged_data_dict \
@@ -85,8 +83,7 @@ def main(use_existing_load, use_wholesale_prices):
 
     # save plots
     print("Saving plots...")
-
-    output_file(f"results/{this_date_time}-existing-{use_existing_load}-price-{use_wholesale_prices}-year.html")
+    output_file(f"results/{now_datetime}-existing-{use_existing_load}-price-{use_wholesale_prices}-year.html")
     output_graph = layout(row(Tabs(tabs=tab_year)), sizing_mode="scale_width")
     save(output_graph)
     show(output_graph)
