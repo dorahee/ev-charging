@@ -45,9 +45,9 @@ def visualise_monthly_results(figure_title, month, datetime_month, network_tarif
                                   source=bokeh_data_source, line_width=2,
                                   color=colour_choices[colour_index])
                 tooltips.append((f'{k}', f"@{k} kW"))
-                legend_label = f"Out:{k}"
+                legend_label = f"Out: {k} demand"
                 if "Ex" in k:
-                    legend_label = f"In:{k}"
+                    legend_label = f"In: {k} demand"
 
             else:
                 p_month.extra_y_ranges = {"WholesalePrices": Range1d(start=min(prices_month), end=max(prices_month))}
@@ -59,10 +59,10 @@ def visualise_monthly_results(figure_title, month, datetime_month, network_tarif
                 hover1 = HoverTool(renderers=[pl], tooltips=tooltips, point_policy='follow_mouse',
                                    mode='vline')
                 p_month.add_tools(hover1)
-                legend_label = f"In:{k}"
+                legend_label = f"In: {k}"
 
             if legend_label is None:
-                legend_label = f"Out:{k}"
+                legend_label = f"Out: {k} demand"
             legend_items.append((legend_label, [pl]))
         elif "Date" not in k and "Per" not in k:
             tooltips.append((f'{k}', f"@{k}"))

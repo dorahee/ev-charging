@@ -46,10 +46,11 @@ def merge_results(num_days, charge_ev_day_period, loads_month, prices_month, dat
     demand_month = [x * 2 for x in loads_month]
     total_demand_month = [c + l for c, l in zip(total_charge_month, demand_month)]
     total_periods = len(loads_month)
-    peak_periods = [(i + 1) * x for i in range(num_days) for x in peak_periods]
+    peak_periods_month = [v for i, v in enumerate(range(total_periods))
+                          if datetime_month[i].hour >= 16 and datetime_month[i].hour <= 21]
     wholesale_cost_month = [x * y * 0.001 * 0.5 for x, y in zip(total_demand_month, prices_month)]
     network_charge_month = [max_demand_peak[0] * network_tariff_peak
-                   if i in peak_periods else max_demand_off_peak[0] * network_tariff_off_peak
+                   if i in peak_periods_month else max_demand_off_peak[0] * network_tariff_off_peak
                    for i in range(total_periods)]
     combine_data_source_dict = {
         "Datetime": [timestamp.strftime("%Y-%m-%d %H:%M:%S") for timestamp in datetime_month],
@@ -58,11 +59,11 @@ def merge_results(num_days, charge_ev_day_period, loads_month, prices_month, dat
         "Existing": demand_month,
         "Total": total_demand_month,
         "Prices": prices_month,
-        "Max": [max_demand_peak[0] if i in peak_periods else max_demand_off_peak[0] for i in
+        "Max": [max_demand_peak[0] if i in peak_periods_month else max_demand_off_peak[0] for i in
                        range(total_periods)],
         "WCost": wholesale_cost_month,
-        "NCharge": network_charge_month,
-        "Obj": [x + y for x, y in zip(wholesale_cost_month, network_charge_month)],
+        # "NCharge": network_charge_month,
+        # "Obj": [x + y for x, y in zip(wholesale_cost_month, network_charge_month)],
     }
 
     return combine_data_source_dict
