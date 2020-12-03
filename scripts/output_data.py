@@ -4,6 +4,7 @@ from bokeh.models import *
 from bokeh.plotting import figure, output_file
 from bokeh.palettes import Set2
 from datetime import datetime
+import numpy as np
 
 colour_choices = Set2[8]
 days_week = {
@@ -15,6 +16,40 @@ days_week = {
     5: "Sat.",
     6: "Sun"
 }
+
+
+def merge_results(num_days, charge_ev_day_period, loads_month, prices_month, datetime_month,
+                  max_demand_peak, max_demand_off_peak,
+                  peak_periods, off_peak_periods, network_tariff_peak, network_tariff_off_peak):
+    # combine results
+    charge_month = []
+    for charge_ev in charge_ev_day_period:
+        charge_ev_month = []
+        for charge_ev_day in charge_ev:
+            charge_ev_month.extend(charge_ev_day)
+        charge_month.append(charge_ev_month)
+    total_charge_month = np.sum(charge_month, axis=0).tolist()
+    demand_month = [x * 2 for x in loads_month]
+    total_demand_month = [c + l for c, l in zip(total_charge_month, demand_month)]
+    total_periods = len(loads_month)
+    peak_periods_month = [v for i, v in enumerate(range(total_periods))
+                          if 16 <= datetime_month[i].hour <= 21]
+    wholesale_cost_month = [x * y * 0.001 * 0.5 for x, y in zip(total_demand_month, prices_month)]
+
+    combine_data_source_dict = {
+        "Datetime": [timestamp.strftime("%Y-%m-%d %H:%M:%S") for timestamp in datetime_month],
+        "Periods": [i for i in range(total_periods)],
+        "EVs": total_charge_month,
+        "Existing": demand_month,
+        "Total": total_demand_month,
+        "Prices": prices_month,
+        "Max": [max_demand_peak[0] if i in peak_periods_month else max_demand_off_peak[0] for i in
+                       range(total_periods)],
+        "WCost": wholesale_cost_month,
+        # "NCharge": network_charge_month,
+        # "Obj": [x + y for x, y in zip(wholesale_cost_month, network_charge_month)],
+    }
+    return combine_data_source_dict
 
 
 def visualise_monthly_results(figure_title, month, datetime_month, network_tariff_peak, network_tariff_off_peak,

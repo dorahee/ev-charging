@@ -2,7 +2,9 @@ import pandas as pd
 
 
 def read_data(start_time_day, end_time_day,
-              file_prices_data="data/wholesale_data.csv", file_load_data="data/load_data.csv"):
+              file_prices_data="data/wholesale_data.csv", file_load_data="data/load_data.csv",
+              use_prices=True, include_existing_demand=True):
+
     # read wholesale prices
     df_prices = pd.read_csv(rf"{file_prices_data}", index_col=0, parse_dates=True)
     df_prices_filtered = df_prices.between_time(start_time_day, end_time_day)
