@@ -49,9 +49,7 @@ def merge_results(num_days, charge_ev_day_period, loads_month, prices_month, dat
     peak_periods_month = [v for i, v in enumerate(range(total_periods))
                           if datetime_month[i].hour >= 16 and datetime_month[i].hour <= 21]
     wholesale_cost_month = [x * y * 0.001 * 0.5 for x, y in zip(total_demand_month, prices_month)]
-    network_charge_month = [max_demand_peak[0] * network_tariff_peak
-                   if i in peak_periods_month else max_demand_off_peak[0] * network_tariff_off_peak
-                   for i in range(total_periods)]
+
     combine_data_source_dict = {
         "Datetime": [timestamp.strftime("%Y-%m-%d %H:%M:%S") for timestamp in datetime_month],
         "Periods": [i for i in range(total_periods)],
@@ -84,7 +82,7 @@ def main(use_existing_load, use_wholesale_prices):
         num_periods = len(prices_month)
 
         if use_wholesale_prices:
-            prices_2d = [list(x) for x in np.reshape(loads_month, (num_days, num_periods_day))]
+            prices_2d = [list(x) for x in np.reshape(prices_month, (num_days, num_periods_day))]
         else:
             prices_month = [0 for _ in range(num_periods)]
             prices_2d = [[0 for _ in range(num_periods_day)] for _ in range(num_days)]
